@@ -3,10 +3,12 @@ const isOpen = ref(false);
 </script>
 
 <template>
-  <header class="sm:flex sm:justify-between sm:items-center sm:px-4 sm:py-3">
-    <div class="flex items-center justify-between px-4 py-3 sm:p-0">
+  <header class="sm:mt-12 sm:px-4 sm:py-3">
+    <div
+      class="flex items-center justify-between px-4 py-3 sm:justify-center sm:p-0"
+    >
       <div>
-        <h1 class="font-semibold text-2xl text-gray-600">Coding Journal</h1>
+        <h1 class="font-semibold text-2xl">Coding Journal</h1>
       </div>
       <div class="sm:hidden">
         <button
@@ -31,7 +33,7 @@ const isOpen = ref(false);
     </div>
     <nav
       :class="isOpen ? 'block' : 'hidden'"
-      class="px-2 pt-2 pb-4 sm:flex sm:p-0"
+      class="px-2 pt-2 pb-4 sm:flex sm:justify-center sm:pt-16"
     >
       <NuxtLink to="/" class="nav-link"> Logs </NuxtLink>
       <NuxtLink to="/projects" class="nav-link"> Projects </NuxtLink>
@@ -45,7 +47,7 @@ const isOpen = ref(false);
   @apply mt-1;
 }
 .nav-link {
-  @apply block px-2 py-1 text-gray-500 rounded hover:underline hover:underline-offset-4 hover:decoration-4 hover:decoration-gray-500 sm:mt-0 sm:ml-2;
+  @apply block px-2 py-1 rounded hover:underline hover:underline-offset-4 hover:decoration-4 hover:decoration-gray-500 sm:mt-0 sm:ml-2;
 }
 .nav-link.router-link-active {
   @apply underline underline-offset-4 decoration-4 decoration-gray-500;

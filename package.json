@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.6.6",
-    "@storyblok/nuxt": "^5.4.2"
+    "@storyblok/nuxt": "^5.4.2",
+    "dayjs": "^1.11.7"
   }
 }

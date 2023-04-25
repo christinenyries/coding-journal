@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// import { ISbStoryData } from "storyblok-js-client";
 import useAsyncDataStatus from "~/composables/useAsyncDataStatus";
 
 const { makeReady } = useAsyncDataStatus();

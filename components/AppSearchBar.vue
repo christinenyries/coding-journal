@@ -10,7 +10,7 @@
     />
     <NuxtLink
       class="absolute right-0 top-0 mt-3 mr-4"
-      :to="{ name: 'index', query: { search_term: searchTerm } }"
+      :to="{ name: $route.name || 'index', query: { search_term: searchTerm } }"
     >
       <svg
         id="Capa_1"
@@ -38,7 +38,7 @@
 const searchTerm = ref<string>("");
 const search = () => {
   useRouter().push({
-    name: "index",
+    name: useRoute().name || "index",
     query: { ...useRoute().query, search_term: searchTerm.value },
   });
 };

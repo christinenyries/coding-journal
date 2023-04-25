@@ -3,14 +3,14 @@
 import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 
-import { ISbStoriesParams, ISbStories } from "storyblok-js-client";
+import { ISbStoriesParams, ISbStoryData } from "storyblok-js-client";
 import useAsyncDataStatus from "~/composables/useAsyncDataStatus";
 
 const key = "logs";
 const route = useRoute();
 const storyblokApi = useStoryblokApi();
 const { makeReady } = useAsyncDataStatus();
-const stories = ref<ISbStories | null>(null);
+const stories = ref<ISbStoryData[]>([]);
 const page = ref(Number(route.query.page) || 1);
 const perPage = 10;
 let totalPages = 0;
@@ -33,20 +33,8 @@ const { data } = await useAsyncData(
   key,
   async () => await storyblokApi.get("cdn/stories/", storiesParams)
 );
-stories.value = data.value;
-totalPages = Math.ceil((stories.value?.total || 0) / perPage);
-
-const logs = computed(
-  () =>
-    stories.value?.data.stories.map((story) => ({
-      uid: story.content._uid,
-      title: story.content.title,
-      published: story.first_published_at || story.created_at,
-      lastEdited: story.published_at || undefined,
-      tags: story.tag_list,
-      slug: story.full_slug,
-    })) || []
-);
+totalPages = Math.ceil((data.value?.total || 0) / perPage);
+stories.value = data.value?.data.stories || [];
 
 const updatePage = () => {
   useRouter().push({
@@ -58,17 +46,17 @@ makeReady();
 </script>
 
 <template>
-  <div v-if="logs.length" class="flex flex-col gap-y-6">
+  <div v-if="stories.length" class="flex flex-col gap-y-6">
     <!-- TODO: Fixed "Hydration mismatch" err. Research why. -->
     <ClientOnly>
       <LogCard
-        v-for="log in logs"
-        :key="log.uid"
-        :slug="log.slug"
-        :title="log.title"
-        :tags="log.tags"
-        :published="log.published"
-        :last-edited="log.lastEdited"
+        v-for="story in stories"
+        :key="story.content._uid"
+        :slug="story.full_slug"
+        :published="story.first_published_at || story.created_at"
+        :last-edited="story.published_at || undefined"
+        :tags="story.tag_list"
+        :title="story.content.title"
       />
       <v-pagination
         v-model="page"

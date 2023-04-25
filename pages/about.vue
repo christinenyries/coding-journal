@@ -32,8 +32,9 @@
         >
         are handled with care. She had recently moved to web development,
         somehow overwhelmed by the myriad of technologies available, and by how
-        fast things are moving. Her front-end framework of choice at the moment
-        is VueJS.
+        blazingly fast things are moving. Hopefully, maintaining this website
+        will provide the necessary space to guide her learnings. Her front-end
+        framework of choice at the moment is VueJS.
       </p>
       <p>You can reach her via:</p>
       <ul>
@@ -46,7 +47,7 @@
     </section>
     <section>
       <h2>this.website.technologies</h2>
-      <p>This website is powered by the following technologies:</p>
+      <p>This website is powered by:</p>
       <ul>
         <li v-for="(technology, index) in technologies" :key="index">
           <a :href="technology.link" target="_blank">

@@ -26,7 +26,7 @@ defineProps({
         <img
           class="border w-full"
           :src="image"
-          :alt="`${title}'s project image`"
+          :alt="`${title} project's image`"
         />
         <h4 class="my-4 font-semibold text-2xl leading-tight">
           {{ title }}

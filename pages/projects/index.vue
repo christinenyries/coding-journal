@@ -30,7 +30,7 @@ makeReady();
 </script>
 
 <template>
-  <div v-if="stories.length" class="flex gap-6 flex-wrap">
+  <div v-if="stories.length" class="flex gap-6 flex-wrap justify-center">
     <!-- TODO: Fixed "Hydration mismatch" err. Research why. -->
     <ClientOnly>
       <ProjectCard

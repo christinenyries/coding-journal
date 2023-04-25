@@ -39,12 +39,36 @@ const content = computed(() => renderRichText(props.blok.content));
 
     <!-- NOTE: Can lead to XSS attacks, but I'm the only one providing input to this field, so I think it's okay to disable this for now. -->
     <!-- eslint-disable-next-line vue/no-v-html -->
-    <div class="content py-4" v-html="content"></div>
+    <div class="content py-4 text-lg leading-relaxed" v-html="content"></div>
   </article>
 </template>
 
 <style scoped>
-:deep(.content) p {
-  @apply mb-8 text-lg leading-relaxed;
+:deep(.content) > * {
+  @apply mb-8;
+}
+
+:deep(.content) p > code,
+:deep(.content) li > code,
+:deep(.content) dd > code,
+:deep(.content) td > code {
+  background: darkslategray;
+  word-wrap: break-word;
+  box-decoration-break: clone;
+  padding: 0.1rem 0.3rem 0.2rem;
+  border-radius: 0.2rem;
+}
+
+:deep(.content) pre code {
+  display: block;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: scroll;
+  max-width: 100%;
+  min-width: 100px;
+}
+
+:deep(.content) code {
+  @apply p-4 bg-gray-600 text-white rounded-md;
 }
 </style>

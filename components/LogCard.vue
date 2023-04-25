@@ -2,39 +2,47 @@
 defineProps({
   title: {
     type: String,
-    default: "Log Title",
+    required: true,
   },
   tags: {
     type: Array,
-    default: () => [],
+    required: true,
+  },
+  slug: {
+    type: String,
+    required: true,
   },
   published: {
-    type: Date,
-    default: () => new Date(0),
+    type: String,
+    required: true,
   },
   lastEdited: {
-    type: Date,
-    default: () => new Date(0),
+    type: String,
+    default: null,
     required: false,
   },
 });
 </script>
 
 <template>
-  <div class="border rounded-lg overflow-hidden">
-    <div class="p-6">
-      <h4 class="font-semibold text-lg leading-tight truncate">{{ title }}</h4>
-      <div class="mt-2 flex items-center">
-        <span class="text-gray-600 text-sm"
-          >Published <AppDate :utc="published" />
-        </span>
-        <span v-if="lastEdited" class="ml-2 text-gray-600 text-sm"
-          >Last Edited <AppDate :utc="lastEdited"
-        /></span>
+  <div class="border-2 rounded-lg overflow-hidden hover:bg-gray-50">
+    <NuxtLink :to="slug">
+      <div class="p-6">
+        <div class="flex items-center flex-wrap gap-2">
+          <AppBadge v-for="(tag, index) in tags" :key="index" :name="tag" />
+        </div>
+
+        <h4 class="my-2 font-semibold text-2xl leading-tight">
+          {{ title }}
+        </h4>
+
+        <div class="text-gray-600 text-sm text-right">
+          <span>published <AppDate :utc="published" /></span>
+          <span v-if="lastEdited"
+            >, last edited <AppDate :utc="lastEdited"
+          /></span>
+        </div>
       </div>
-      <div class="pt-2 flex items-center flex-wrap gap-2">
-        <AppBadge v-for="(tag, index) in tags" :key="index" :name="tag" />
-      </div>
-    </div>
+    </NuxtLink>
   </div>
 </template>

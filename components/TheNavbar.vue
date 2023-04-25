@@ -3,14 +3,18 @@ const isOpen = ref(false);
 </script>
 
 <template>
-  <header class="sm:mt-12 sm:px-4 sm:py-3">
-    <div
-      class="flex items-center justify-between px-4 py-3 sm:justify-center sm:p-0"
-    >
+  <header class="border-b-2 p-2 sm:flex sm:justify-between">
+    <div class="hidden lg:block lg:flex-1">
+      <AppSearchBar />
+    </div>
+    <div class="flex items-center justify-between sm:justify-center lg:flex-1">
       <div>
-        <h1 class="font-semibold text-2xl">Coding Journal</h1>
+        <img
+          src="https://a.storyblok.com/f/224118/340x132/e3ee1cdf49/coding-journal.png"
+          alt="Coding Journal Logo"
+        />
       </div>
-      <div class="sm:hidden">
+      <div class="mr-3 sm:hidden">
         <button
           type="button"
           class="block text-gray-400 hover:text-black focus:text-black focus:outline-none"
@@ -33,9 +37,9 @@ const isOpen = ref(false);
     </div>
     <nav
       :class="isOpen ? 'block' : 'hidden'"
-      class="px-2 pt-2 pb-4 sm:flex sm:justify-center sm:pt-16"
+      class="px-1 py-2 text-lg lowercase sm:flex sm:justify-center sm:gap-x-10 lg:flex-1"
     >
-      <NuxtLink to="/" class="nav-link"> Logs </NuxtLink>
+      <NuxtLink :to="{ name: 'index' }" class="nav-link"> Logs </NuxtLink>
       <NuxtLink to="/projects" class="nav-link"> Projects </NuxtLink>
       <NuxtLink to="/about" class="nav-link"> About </NuxtLink>
     </nav>
@@ -44,7 +48,7 @@ const isOpen = ref(false);
 
 <style scoped>
 .nav-link + .nav-link {
-  @apply mt-1;
+  @apply mt-1 sm:mt-0;
 }
 .nav-link {
   @apply block px-2 py-1 rounded hover:underline hover:underline-offset-4 hover:decoration-4 hover:decoration-gray-500 sm:mt-0 sm:ml-2;

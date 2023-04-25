@@ -7,4 +7,7 @@ export default defineNuxtConfig({
       region: "eu",
     },
   },
+  eslint: {
+    lintOnStart: false,
+  },
 });

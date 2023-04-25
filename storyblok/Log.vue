@@ -22,7 +22,7 @@ const content = computed(() => renderRichText(props.blok.content));
 </script>
 
 <template>
-  <article class="mx-auto mt-20 p-6 max-w-xl">
+  <article>
     <h1 class="text-3xl font-semibold">{{ blok.title }}</h1>
     <div class="py-2 flex justify-between">
       <div class="pt-1 text-gray-600 text-sm">

@@ -51,7 +51,7 @@ onBeforeRouteUpdate(async (to) => {
 </script>
 
 <template>
-  <div class="mx-auto mt-20 px-6 flex flex-col gap-y-6 max-w-xl">
+  <div class="flex flex-col gap-y-6">
     <!-- TODO: Fixed Hydration node mismatch error on console. Research why -->
     <ClientOnly>
       <LogCard

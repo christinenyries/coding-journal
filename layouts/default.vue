@@ -1,7 +1,7 @@
 <template>
   <main>
     <TheNavbar />
-    <div>
+    <div class="mx-auto my-20 px-6 max-w-xl">
       <div v-show="ready">
         <slot />
       </div>

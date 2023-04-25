@@ -1,26 +1,56 @@
 <template>
-  <article class="p-6">
-    <h1 class="text-xl font-semibold">About</h1>
-    <p>
-      A humble place to document my personal coding projects. Probably includes
-      why I decided to start a project, how do I plan to get there, what the
-      actual process looked like, what bugs have I encountered and how did I fix
-      them, etc.
-    </p>
+  <article class="text-lg">
+    <h1 class="pb-6 text-3xl font-semibold">About</h1>
     <section>
-      <h2>This website is powered by</h2>
-      <ul class="flex gap-x-4">
-        <li
-          v-for="(technology, index) in technologies"
-          :key="index"
-          class="border rounded-lg p-4 pb-3"
+      <h2>this.website</h2>
+      <p>
+        A humble place to document the author's personal coding projects and
+        learnings.
+      </p>
+      <p>This would probably include:</p>
+      <ul>
+        <li>New technology study plans.</li>
+        <li>Project brainstorming.</li>
+        <li>
+          Project implementation plans (e.g. desired features, design mockups,
+          modules required, routes, etc.).
+        </li>
+        <li>Programming concepts review</li>
+        <li>Bugs encountered discussions</li>
+      </ul>
+    </section>
+    <section>
+      <h2>this.website.author</h2>
+      <p>
+        Have started her programming career in systems/embedded development
+        writing C++ code ensuring
+        <a
+          class="border-b-2 border-dashed underline-offset-4 border-gray-400"
+          href="https://cplusplus.com/doc/tutorial/pointers/"
+          target="_blank"
+          >pointers</a
         >
+        are handled with care. She had recently moved to web development,
+        somehow overwhelmed by the myriad of technologies available, and by how
+        fast things are moving. Her front-end framework of choice at the moment
+        is VueJS.
+      </p>
+      <p>You can reach her via:</p>
+      <ul>
+        <li v-for="(contact, index) in contacts" :key="index" class="">
+          <a :href="contact.link" target="_blank">
+            <img :src="contact.imageURL" :alt="contact.name" />
+          </a>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>this.website.technologies</h2>
+      <p>This website is powered by the following technologies:</p>
+      <ul>
+        <li v-for="(technology, index) in technologies" :key="index">
           <a :href="technology.link" target="_blank">
-            <img
-              class="w-12"
-              :src="technology.imageURL"
-              :alt="technology.name"
-            />
+            <img :src="technology.imageURL" :alt="technology.name" />
           </a>
         </li>
       </ul>
@@ -34,15 +64,21 @@ import useAsyncDataStatus from "~/composables/useAsyncDataStatus";
 const { makeReady } = useAsyncDataStatus();
 const technologies: { name: string; imageURL: string; link: string }[] = [
   {
+    name: "TypeScript",
+    imageURL:
+      "https://a.storyblok.com/f/224118/2500x2500/5f6802589a/typescript.svg",
+    link: "https://www.typescriptlang.org/",
+  },
+  {
     name: "Vue",
     imageURL: "https://a.storyblok.com/f/224118/2500x2158/d9db8a3dea/vue-9.svg",
     link: "https://vuejs.org/",
   },
   {
-    name: "TypeScript",
+    name: "Tailwind",
     imageURL:
-      "https://a.storyblok.com/f/224118/2500x2500/5f6802589a/typescript.svg",
-    link: "https://www.typescriptlang.org/",
+      "https://a.storyblok.com/f/224118/2500x1504/5db286642a/tailwindcss.svg",
+    link: "https://tailwindcss.com/",
   },
   {
     name: "Nuxt",
@@ -63,6 +99,44 @@ const technologies: { name: string; imageURL: string; link: string }[] = [
     link: "https://www.netlify.com/",
   },
 ];
+const contacts: { name: string; imageURL: string; link: string }[] = [
+  {
+    name: "Gmail",
+    imageURL: "https://a.storyblok.com/f/224118/150x150/ef9fa8b449/gmail.svg",
+    link: "mailto:yambao.cn@gmail.com",
+  },
+  {
+    name: "LinkedIn",
+    imageURL:
+      "https://a.storyblok.com/f/224118/150x150/03146228a9/linkedin.svg",
+    link: "https://ph.linkedin.com/in/christine-nyries-yambao",
+  },
+  {
+    name: "Github",
+    imageURL: "https://a.storyblok.com/f/224118/512x512/82c75ba52d/github.svg",
+    link: "https://github.com/christinenyries",
+  },
+];
 makeReady();
-// TODO: Add tailwind
 </script>
+
+<style scoped>
+section {
+  @apply my-6;
+}
+p {
+  @apply mb-2;
+}
+h2 {
+  @apply text-2xl font-semibold mb-2;
+}
+ul {
+  @apply my-6 flex flex-wrap gap-4;
+}
+li {
+  @apply border rounded-lg p-4 pb-3;
+}
+img {
+  @apply w-12;
+}
+</style>

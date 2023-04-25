@@ -9,10 +9,12 @@ const isOpen = ref(false);
     </div>
     <div class="flex items-center justify-between sm:justify-center lg:flex-1">
       <div>
-        <img
-          src="https://a.storyblok.com/f/224118/340x132/e3ee1cdf49/coding-journal.png"
-          alt="Coding Journal Logo"
-        />
+        <NuxtLink :to="{ name: 'index' }">
+          <img
+            src="https://a.storyblok.com/f/224118/340x132/e3ee1cdf49/coding-journal.png"
+            alt="Coding Journal Logo"
+          />
+        </NuxtLink>
       </div>
       <div class="mr-3 sm:hidden">
         <button

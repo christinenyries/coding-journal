@@ -2,7 +2,7 @@
   <main>
     <TheNavbar />
     <div class="mx-auto my-20 px-6 max-w-xl">
-      <div v-show="ready">
+      <div v-show="ready" :key="$route.query">
         <slot />
       </div>
       <AppSpinner v-show="!ready" />

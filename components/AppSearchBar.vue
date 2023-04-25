@@ -37,6 +37,9 @@
 <script setup lang="ts">
 const searchTerm = ref<string>("");
 const search = () => {
-  useRouter().push({ name: "index", query: { search_term: searchTerm.value } });
+  useRouter().push({
+    name: "index",
+    query: { ...useRoute().query, search_term: searchTerm.value },
+  });
 };
 </script>

@@ -1,61 +1,65 @@
 <script setup lang="ts">
-import { ISbStoryData, ISbStoriesParams } from "storyblok-js-client";
-import { LocationQuery } from "vue-router";
+// TODO: Import via plugin
+import VPagination from "@hennge/vue3-pagination";
+import "@hennge/vue3-pagination/dist/vue3-pagination.css";
+
+import { ISbStoriesParams, ISbStories } from "storyblok-js-client";
 import useAsyncDataStatus from "~/composables/useAsyncDataStatus";
 
 const key = "logs";
 const route = useRoute();
 const storyblokApi = useStoryblokApi();
 const { makeReady } = useAsyncDataStatus();
-const stories = ref<ISbStoryData[]>([]);
-
-const fetchStories = async (query: LocationQuery) => {
-  const storiesParams: ISbStoriesParams = {
-    starts_with: key,
-    per_page: 10,
-    version: "draft",
-  };
-  storiesParams.page = Number(query.page) || 1;
-  if (query.with_tag) {
-    const tags = query.with_tag;
-    storiesParams.with_tag = Array.isArray(tags) ? tags.join(",") : tags;
-  }
-  if (typeof query.search_term === "string") {
-    storiesParams.search_term = query.search_term;
-  }
-
-  const { data } = await useAsyncData(
-    key,
-    async () => await storyblokApi.get("cdn/stories/", storiesParams)
-  );
-  stories.value = data.value?.data.stories;
+const stories = ref<ISbStories | null>(null);
+const page = ref(Number(route.query.page) || 1);
+const perPage = 10;
+let totalPages = 0;
+const storiesParams: ISbStoriesParams = {
+  starts_with: key,
+  per_page: perPage,
+  page: page.value,
+  version: "draft",
 };
 
-const logs = computed(() =>
-  stories.value.map((story) => ({
-    uid: story.content._uid,
-    title: story.content.title,
-    published: story.first_published_at || story.created_at,
-    lastEdited: story.published_at || undefined,
-    tags: story.tag_list,
-    slug: story.full_slug,
-  }))
+if (route.query.with_tag) {
+  const tags = route.query.with_tag;
+  storiesParams.with_tag = Array.isArray(tags) ? tags.join(",") : tags;
+}
+if (typeof route.query.search_term === "string") {
+  storiesParams.search_term = route.query.search_term;
+}
+
+const { data } = await useAsyncData(
+  key,
+  async () => await storyblokApi.get("cdn/stories/", storiesParams)
+);
+stories.value = data.value;
+totalPages = Math.ceil((stories.value?.total || 0) / perPage);
+
+const logs = computed(
+  () =>
+    stories.value?.data.stories.map((story) => ({
+      uid: story.content._uid,
+      title: story.content.title,
+      published: story.first_published_at || story.created_at,
+      lastEdited: story.published_at || undefined,
+      tags: story.tag_list,
+      slug: story.full_slug,
+    })) || []
 );
 
-(async () => {
-  await fetchStories(route.query);
-  makeReady();
-})();
-
-// TODO: Check how changes in visual editor can be reflected immediately
-onBeforeRouteUpdate(async (to) => {
-  await fetchStories(to.query);
-});
+const updatePage = () => {
+  useRouter().push({
+    name: "index",
+    query: { ...route.query, page: page.value },
+  });
+};
+makeReady();
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-6">
-    <!-- TODO: Fixed Hydration node mismatch error on console. Research why -->
+  <div v-if="logs.length" class="flex flex-col gap-y-6">
+    <!-- TODO: Fixed "Hydration mismatch" err. Research why. -->
     <ClientOnly>
       <LogCard
         v-for="log in logs"
@@ -66,6 +70,22 @@ onBeforeRouteUpdate(async (to) => {
         :published="log.published"
         :last-edited="log.lastEdited"
       />
+      <v-pagination
+        v-model="page"
+        :pages="totalPages"
+        :range-size="2"
+        active-color="#F9FAFB"
+        @update:model-value="updatePage"
+      />
     </ClientOnly>
   </div>
+  <div v-else>
+    <p class="italic text-lg text-center">Will publish something soon.</p>
+  </div>
 </template>
+
+<style scoped>
+:deep(.Pagination) {
+  justify-content: center;
+}
+</style>

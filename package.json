@@ -24,6 +24,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@hennge/vue3-pagination": "^1.0.17",
     "@nuxtjs/tailwindcss": "^6.6.6",
     "@storyblok/nuxt": "^5.4.2",
     "dayjs": "^1.11.7"

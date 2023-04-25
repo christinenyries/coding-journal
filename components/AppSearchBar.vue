@@ -1,12 +1,12 @@
 <template>
-  <div class="inline-block pt-2 relative mx-auto text-gray-600">
+  <div class="inline-block relative mx-auto text-gray-600">
     <input
       class="border-2 border-gray-300 bg-white h-10 px-3 pr-10 rounded-lg text-sm focus:outline-none"
       type="search"
       name="search"
       placeholder="Search"
     />
-    <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
+    <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
       <svg
         id="Capa_1"
         class="text-gray-600 h-4 w-4 fill-current"

@@ -3,11 +3,15 @@ const isOpen = ref(false);
 </script>
 
 <template>
-  <header class="border-b-2 p-2 sm:flex sm:justify-between">
-    <div class="hidden lg:block lg:flex-1">
-      <AppSearchBar />
+  <header class="bg-gray-50 sm:p-2 sm:border-b-2 sm:flex sm:justify-between">
+    <div class="hidden pl-4 lg:flex lg:items-center lg:justify-start lg:w-1/3">
+      <div>
+        <AppSearchBar />
+      </div>
     </div>
-    <div class="flex items-center justify-between sm:justify-center lg:flex-1">
+    <div
+      class="p-2 flex items-center justify-between border-b-2 sm:p-0 sm:border-none sm:justify-center"
+    >
       <div>
         <NuxtLink :to="{ name: 'index' }">
           <img
@@ -39,11 +43,15 @@ const isOpen = ref(false);
     </div>
     <nav
       :class="isOpen ? 'block' : 'hidden'"
-      class="px-1 py-2 text-lg lowercase sm:flex sm:justify-center sm:gap-x-10 lg:flex-1"
+      class="text-xl tracking-wide lowercase bg-white sm:flex sm:bg-inherit lg:justify-end lg:w-1/3"
     >
-      <NuxtLink :to="{ name: 'index' }" class="nav-link"> Logs </NuxtLink>
-      <NuxtLink to="/projects" class="nav-link"> Projects </NuxtLink>
-      <NuxtLink to="/about" class="nav-link"> About </NuxtLink>
+      <div
+        class="mr-0 px-4 pt-4 text-right sm:pt-0 sm:items-center sm:flex sm:gap-x-10"
+      >
+        <NuxtLink :to="{ name: 'index' }" class="nav-link"> Logs </NuxtLink>
+        <NuxtLink to="/projects" class="nav-link"> Projects </NuxtLink>
+        <NuxtLink to="/about" class="nav-link"> About </NuxtLink>
+      </div>
     </nav>
   </header>
 </template>
@@ -53,7 +61,7 @@ const isOpen = ref(false);
   @apply mt-1 sm:mt-0;
 }
 .nav-link {
-  @apply block px-2 py-1 rounded hover:underline hover:underline-offset-4 hover:decoration-4 hover:decoration-gray-500 sm:mt-0 sm:ml-2;
+  @apply block p-2 rounded hover:underline hover:underline-offset-4 hover:decoration-4 hover:decoration-gray-500 sm:mt-0 sm:ml-2;
 }
 .nav-link.router-link-active {
   @apply underline underline-offset-4 decoration-4 decoration-gray-500;

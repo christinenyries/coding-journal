@@ -9,7 +9,7 @@ const { makeReady } = useAsyncDataStatus();
 const stories = ref<ISbStoryData[]>([]);
 const storiesParams: ISbStoriesParams = {
   starts_with: key,
-  version: "draft",
+  version: route.query._storyblok ? "draft" : "published",
 };
 
 if (route.query.with_tag) {

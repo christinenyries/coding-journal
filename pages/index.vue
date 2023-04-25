@@ -18,7 +18,7 @@ const storiesParams: ISbStoriesParams = {
   starts_with: key,
   per_page: perPage,
   page: page.value,
-  version: "draft",
+  version: route.query._storyblok ? "draft" : "published",
 };
 
 if (route.query.with_tag) {

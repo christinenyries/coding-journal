@@ -4,7 +4,7 @@ import useAsyncDataStatus from "~/composables/useAsyncDataStatus";
 const route = useRoute();
 const { makeReady } = useAsyncDataStatus();
 const story = await useAsyncStoryblok(`projects/${route.params.slug}`, {
-  version: "draft",
+  version: route.query._storyblok ? "draft" : "published",
 });
 makeReady();
 </script>

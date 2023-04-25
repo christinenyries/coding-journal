@@ -20,6 +20,9 @@ const fetchStories = async (query: LocationQuery) => {
     const tags = query.with_tag;
     storiesParams.with_tag = Array.isArray(tags) ? tags.join(",") : tags;
   }
+  if (typeof query.search_term === "string") {
+    storiesParams.search_term = query.search_term;
+  }
 
   const { data } = await useAsyncData(
     key,

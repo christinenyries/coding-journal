@@ -5,7 +5,6 @@ const key = "projects";
 const { query } = useRoute();
 const env = useEnvVariables();
 const storyblokApi = useStoryblokApi();
-const { makeReady } = useAsyncDataStatus();
 const stories = ref<ISbStoryData[]>([]);
 const storiesParams: ISbStoriesParams = {
   starts_with: key,
@@ -25,8 +24,6 @@ const { data } = await useAsyncData(
   async () => await storyblokApi.get("cdn/stories/", storiesParams)
 );
 stories.value = data.value?.data.stories || [];
-
-makeReady();
 </script>
 
 <template>

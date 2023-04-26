@@ -60,9 +60,6 @@
 </template>
 
 <script setup lang="ts">
-import useAsyncDataStatus from "~/composables/useAsyncDataStatus";
-
-const { makeReady } = useAsyncDataStatus();
 const technologies: { name: string; imageURL: string; link: string }[] = [
   {
     name: "TypeScript",
@@ -118,7 +115,6 @@ const contacts: { name: string; imageURL: string; link: string }[] = [
     link: "https://github.com/christinenyries",
   },
 ];
-makeReady();
 </script>
 
 <style scoped>

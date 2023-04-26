@@ -1,17 +1,9 @@
 <template>
   <main>
+    <NuxtLoadingIndicator />
     <TheNavbar />
-    <div class="mx-auto my-20 px-6 max-w-2xl">
-      <div v-show="ready" :key="$route.query">
-        <slot />
-      </div>
-      <AppSpinner v-show="!ready" />
+    <div class="text- mx-auto my-20 px-6 max-w-2xl">
+      <slot />
     </div>
   </main>
 </template>
-
-<script setup>
-import useAsyncDataStatus from "~/composables/useAsyncDataStatus";
-
-const { ready } = useAsyncDataStatus();
-</script>

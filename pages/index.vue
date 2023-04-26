@@ -9,7 +9,6 @@ const key = "logs";
 const { query } = useRoute();
 const env = useEnvVariables();
 const storyblokApi = useStoryblokApi();
-const { makeReady } = useAsyncDataStatus();
 const stories = ref<ISbStoryData[]>([]);
 const page = ref(Number(query.page) || 1);
 const perPage = 10;
@@ -44,7 +43,6 @@ const updatePage = () => {
     query: { ...query, page: page.value },
   });
 };
-makeReady();
 </script>
 
 <template>

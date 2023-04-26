@@ -33,7 +33,7 @@ stories.value = data.value?.data.stories || [];
       <ProjectCard
         v-for="story in stories"
         :key="story.content._uid"
-        :slug="story.full_slug"
+        :slug="story.slug"
         :tags="story.tag_list"
         :title="story.content.title"
         :image="story.content.image.filename"

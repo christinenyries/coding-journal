@@ -52,7 +52,7 @@ const updatePage = () => {
       <LogCard
         v-for="story in stories"
         :key="story.content._uid"
-        :slug="story.full_slug"
+        :slug="story.slug"
         :published="story.first_published_at || story.created_at"
         :last-edited="story.published_at || undefined"
         :tags="story.tag_list"

@@ -26,7 +26,7 @@ defineProps({
 
 <template>
   <div class="border-2 rounded-lg overflow-hidden hover:bg-gray-50">
-    <NuxtLink :to="slug">
+    <NuxtLink :to="{ name: 'logs-slug', params: { slug } }">
       <div class="p-6">
         <div class="flex items-center flex-wrap gap-2">
           <AppBadge v-for="(tag, index) in tags" :key="index" :name="tag" />

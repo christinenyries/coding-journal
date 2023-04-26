@@ -21,7 +21,7 @@ defineProps({
 
 <template>
   <div class="border-2 rounded-lg overflow-hidden hover:bg-gray-50 w-72">
-    <NuxtLink :to="slug">
+    <NuxtLink :to="{ name: 'projects-slug', params: { slug } }">
       <div class="p-6">
         <img
           class="border w-full"

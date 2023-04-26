@@ -35,18 +35,19 @@
 </template>
 
 <script setup lang="ts">
-import { RouteRecordName } from "vue-router";
-
-const searchableRoutes: RouteRecordName[] = ["index", "projects", "logs"];
 const searchTerm = ref<string>("");
+const route = useRoute();
+
 const search = () => {
-  let routeName = useRoute().query.name as RouteRecordName;
-  if (!routeName || !searchableRoutes.includes(routeName)) {
-    routeName = "index";
-  }
+  const searchRoute = ["projects", "projects-slug"].includes(
+    (route.name as string) || ""
+  )
+    ? "projects"
+    : "index";
+
   useRouter().push({
-    name: routeName,
-    query: { ...useRoute().query, search_term: searchTerm.value },
+    name: searchRoute,
+    query: { ...route.query, search_term: searchTerm.value },
   });
 };
 </script>

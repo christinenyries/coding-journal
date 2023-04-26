@@ -12,7 +12,7 @@ defineProps({
 </script>
 
 <template>
-  <article class="text-lg">
+  <article v-editable="blok" class="text-lg">
     <h1 class="text-3xl font-semibold mb-4">{{ blok.title }}</h1>
     <img
       class="w-full my-2"

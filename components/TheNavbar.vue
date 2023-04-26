@@ -61,9 +61,9 @@ const isOpen = ref(false);
   @apply mt-1 sm:mt-0;
 }
 .nav-link {
-  @apply block p-2 rounded hover:underline hover:underline-offset-4 hover:decoration-4 hover:decoration-gray-500 sm:mt-0 sm:ml-2;
+  @apply block p-2 rounded hover:underline hover:underline-offset-8 hover:decoration-4 hover:decoration-gray-500 sm:mt-0 sm:ml-2;
 }
 .nav-link.router-link-active {
-  @apply underline underline-offset-4 decoration-4 decoration-gray-500;
+  @apply underline underline-offset-8 decoration-4 decoration-gray-500;
 }
 </style>

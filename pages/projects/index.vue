@@ -1,27 +1,24 @@
 <script setup lang="ts">
-import { ISbStoriesParams, ISbStoryData } from "storyblok-js-client";
+import { ISbStoryData } from "storyblok-js-client";
 
-const key = "projects";
-const { query } = useRoute();
+const route = useRoute();
 const env = useEnvVariables();
-const storyblokApi = useStoryblokApi();
+const api = useStoryblokApi();
+
+const isDev = route.query._storyblok || env.isDev;
+const tags = route.query.with_tag;
+const searchTerm = route.query.search_term;
+
 const stories = ref<ISbStoryData[]>([]);
-const storiesParams: ISbStoriesParams = {
-  starts_with: key,
-  version: query._storyblok || env.isDev ? "draft" : "published",
-};
-
-if (query.with_tag) {
-  const tags = query.with_tag;
-  storiesParams.with_tag = Array.isArray(tags) ? tags.join(",") : tags;
-}
-if (typeof query.search_term === "string") {
-  storiesParams.search_term = query.search_term;
-}
-
 const { data } = await useAsyncData(
-  key,
-  async () => await storyblokApi.get("cdn/stories/", storiesParams)
+  "projects",
+  async () =>
+    await api.get("cdn/stories/", {
+      starts_with: "projects/",
+      ...(typeof tags === "string" && { with_tag: tags }),
+      ...(typeof searchTerm === "string" && { search_term: searchTerm }),
+      version: isDev ? "draft" : "published",
+    })
 );
 stories.value = data.value?.data.stories || [];
 </script>

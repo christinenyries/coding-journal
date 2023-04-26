@@ -3,45 +3,39 @@
 import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 
-import { ISbStoriesParams, ISbStoryData } from "storyblok-js-client";
+import { ISbStoryData } from "storyblok-js-client";
 
-const key = "logs";
-const { query } = useRoute();
+const router = useRouter();
+const route = useRoute();
 const env = useEnvVariables();
 const storyblokApi = useStoryblokApi();
-const stories = ref<ISbStoryData[]>([]);
-const page = ref(Number(query.page) || 1);
+
 const perPage = 10;
-let totalPages = 0;
+const page = ref(Number(route.query.page) || 1);
+const tags = route.query.with_tag;
+const searchTerm = route.query.search_term;
+const isDev = route.query._storyblok || env.isDev;
 
-const storiesParams: ISbStoriesParams = {
-  starts_with: key,
-  per_page: perPage,
-  page: page.value,
-};
-
-if (query.with_tag) {
-  const tags = query.with_tag;
-  storiesParams.with_tag = Array.isArray(tags) ? tags.join(",") : tags;
-}
-if (typeof query.search_term === "string") {
-  storiesParams.search_term = query.search_term;
-}
-
-const { data } = await useAsyncData(key, async () => {
+const stories = ref<ISbStoryData[]>([]);
+const { data } = await useAsyncData("logs", async () => {
   return await storyblokApi.get("cdn/stories/", {
-    ...storiesParams,
-    version: query._storyblok || env.isDev ? "draft" : "published",
+    starts_with: "logs/",
+    page: page.value,
+    per_page: perPage,
+    ...(typeof tags === "string" && { with_tag: tags }),
+    ...(typeof searchTerm === "string" && { search_term: searchTerm }),
+    version: isDev ? "draft" : "published",
   });
 });
-totalPages = Math.ceil((data.value?.total || 0) / perPage);
+const totalPages = Math.ceil((data.value?.total || 0) / perPage);
 stories.value = data.value?.data.stories || [];
 
 const updatePage = () => {
-  useRouter().push({
-    name: "index",
-    query: { ...query, page: page.value },
-  });
+  route.name &&
+    router.push({
+      name: route.name,
+      query: { ...route.query, page: page.value },
+    });
 };
 </script>
 

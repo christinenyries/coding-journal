@@ -2,7 +2,10 @@
   <main>
     <NuxtLoadingIndicator />
     <TheNavbar />
-    <div class="text- mx-auto my-20 px-6 max-w-2xl">
+    <div
+      :key="JSON.stringify($route.query)"
+      class="text- mx-auto my-20 px-6 max-w-2xl"
+    >
       <slot />
     </div>
   </main>

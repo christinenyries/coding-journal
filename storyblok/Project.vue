@@ -20,7 +20,12 @@ defineProps({
       :alt="`${blok.title} project's image`"
     />
     <div class="flex items-center justify-end flex-wrap gap-2">
-      <AppBadge v-for="(tag, index) in tags" :key="index" :name="tag" />
+      <AppBadge
+        v-for="(tag, index) in tags"
+        :key="index"
+        :name="tag"
+        route-name="projects"
+      />
     </div>
     <div class="my-4">
       <p>{{ blok.description }}</p>

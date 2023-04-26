@@ -1,23 +1,23 @@
 <script setup lang="ts">
 import { ISbStoriesParams, ISbStoryData } from "storyblok-js-client";
-import useAsyncDataStatus from "~/composables/useAsyncDataStatus";
 
 const key = "projects";
-const route = useRoute();
+const { query } = useRoute();
+const env = useEnvVariables();
 const storyblokApi = useStoryblokApi();
 const { makeReady } = useAsyncDataStatus();
 const stories = ref<ISbStoryData[]>([]);
 const storiesParams: ISbStoriesParams = {
   starts_with: key,
-  version: route.query._storyblok ? "draft" : "published",
+  version: query._storyblok || env.isDev ? "draft" : "published",
 };
 
-if (route.query.with_tag) {
-  const tags = route.query.with_tag;
+if (query.with_tag) {
+  const tags = query.with_tag;
   storiesParams.with_tag = Array.isArray(tags) ? tags.join(",") : tags;
 }
-if (typeof route.query.search_term === "string") {
-  storiesParams.search_term = route.query.search_term;
+if (typeof query.search_term === "string") {
+  storiesParams.search_term = query.search_term;
 }
 
 const { data } = await useAsyncData(

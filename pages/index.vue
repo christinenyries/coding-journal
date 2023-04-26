@@ -4,42 +4,44 @@ import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 
 import { ISbStoriesParams, ISbStoryData } from "storyblok-js-client";
-import useAsyncDataStatus from "~/composables/useAsyncDataStatus";
 
 const key = "logs";
-const route = useRoute();
+const { query } = useRoute();
+const env = useEnvVariables();
 const storyblokApi = useStoryblokApi();
 const { makeReady } = useAsyncDataStatus();
 const stories = ref<ISbStoryData[]>([]);
-const page = ref(Number(route.query.page) || 1);
+const page = ref(Number(query.page) || 1);
 const perPage = 10;
 let totalPages = 0;
+
 const storiesParams: ISbStoriesParams = {
   starts_with: key,
   per_page: perPage,
   page: page.value,
-  version: route.query._storyblok ? "draft" : "published",
 };
 
-if (route.query.with_tag) {
-  const tags = route.query.with_tag;
+if (query.with_tag) {
+  const tags = query.with_tag;
   storiesParams.with_tag = Array.isArray(tags) ? tags.join(",") : tags;
 }
-if (typeof route.query.search_term === "string") {
-  storiesParams.search_term = route.query.search_term;
+if (typeof query.search_term === "string") {
+  storiesParams.search_term = query.search_term;
 }
 
-const { data } = await useAsyncData(
-  key,
-  async () => await storyblokApi.get("cdn/stories/", storiesParams)
-);
+const { data } = await useAsyncData(key, async () => {
+  return await storyblokApi.get("cdn/stories/", {
+    ...storiesParams,
+    version: query._storyblok || env.isDev ? "draft" : "published",
+  });
+});
 totalPages = Math.ceil((data.value?.total || 0) / perPage);
 stories.value = data.value?.data.stories || [];
 
 const updatePage = () => {
   useRouter().push({
     name: "index",
-    query: { ...route.query, page: page.value },
+    query: { ...query, page: page.value },
   });
 };
 makeReady();

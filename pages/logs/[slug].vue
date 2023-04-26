@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import useAsyncDataStatus from "~/composables/useAsyncDataStatus";
-
 const { makeReady } = useAsyncDataStatus();
 const route = useRoute();
+const env = useEnvVariables();
 const story = await useAsyncStoryblok(`logs/${route.params.slug}`, {
-  version: route.query._storyblok ? "draft" : "published",
+  version: route.query._storyblok || env.isDev ? "draft" : "published",
 });
 makeReady();
 </script>

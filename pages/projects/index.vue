@@ -24,17 +24,19 @@ stories.value = data.value?.data.stories || [];
 </script>
 
 <template>
-  <div v-if="stories.length" class="flex gap-6 flex-wrap justify-center">
-    <ProjectCard
-      v-for="story in stories"
-      :key="story.content._uid"
-      :slug="story.slug"
-      :tags="story.tag_list"
-      :title="story.content.title"
-      :image="story.content.image.filename"
-    />
-  </div>
-  <div v-else>
-    <p class="italic text-lg text-center">Will build something soon.</p>
+  <div>
+    <div v-if="stories.length" class="flex gap-6 flex-wrap justify-center">
+      <ProjectCard
+        v-for="story in stories"
+        :key="story.content._uid"
+        :slug="story.slug"
+        :tags="story.tag_list"
+        :title="story.content.title"
+        :image="story.content.image.filename"
+      />
+    </div>
+    <div v-else>
+      <p class="italic text-lg text-center">Will build something soon.</p>
+    </div>
   </div>
 </template>

@@ -40,26 +40,28 @@ const updatePage = () => {
 </script>
 
 <template>
-  <div v-if="stories.length" class="flex flex-col gap-y-6">
-    <LogCard
-      v-for="story in stories"
-      :key="story.content._uid"
-      :slug="story.slug"
-      :published="story.first_published_at || story.created_at"
-      :last-edited="story.published_at || undefined"
-      :tags="story.tag_list"
-      :title="story.content.title"
-    />
-    <v-pagination
-      v-model="page"
-      :pages="totalPages"
-      :range-size="2"
-      active-color="#F9FAFB"
-      @update:model-value="updatePage"
-    />
-  </div>
-  <div v-else>
-    <p class="italic text-lg text-center">Will publish something soon.</p>
+  <div>
+    <div v-if="stories.length" class="flex flex-col gap-y-6">
+      <LogCard
+        v-for="story in stories"
+        :key="story.content._uid"
+        :slug="story.slug"
+        :published="story.first_published_at || story.created_at"
+        :last-edited="story.published_at || undefined"
+        :tags="story.tag_list"
+        :title="story.content.title"
+      />
+      <v-pagination
+        v-model="page"
+        :pages="totalPages"
+        :range-size="2"
+        active-color="#F9FAFB"
+        @update:model-value="updatePage"
+      />
+    </div>
+    <div v-else>
+      <p class="italic text-lg text-center">Will publish something soon.</p>
+    </div>
   </div>
 </template>
 

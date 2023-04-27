@@ -33,7 +33,7 @@ const content = computed(() =>
     <div class="py-2 flex justify-between">
       <div class="pt-1 text-gray-600 text-sm">
         <span>published <AppDate :utc="published" /></span>
-        <span v-if="lastEdited"
+        <span v-if="lastEdited && lastEdited !== published"
           >, last edited <AppDate :utc="lastEdited"
         /></span>
       </div>
@@ -52,6 +52,10 @@ const content = computed(() =>
 <style scoped>
 :deep(.content) > * {
   @apply mb-8;
+}
+
+:deep(.content) a {
+  @apply border-b-2 border-dashed  border-gray-400;
 }
 
 :deep(.content) p > code,

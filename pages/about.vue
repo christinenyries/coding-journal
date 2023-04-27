@@ -25,7 +25,7 @@
         Have started her programming career in systems/embedded development
         writing C++ code ensuring
         <a
-          class="border-b-2 border-dashed underline-offset-4 border-gray-400"
+          class="border-b-2 border-dashed border-gray-400"
           href="https://cplusplus.com/doc/tutorial/pointers/"
           target="_blank"
           >pointers</a

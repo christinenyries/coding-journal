@@ -42,7 +42,7 @@ defineProps({
 
       <div class="text-gray-600 text-sm text-right">
         <span>published <AppDate :utc="published" /></span>
-        <span v-if="lastEdited"
+        <span v-if="lastEdited && lastEdited !== published"
           >, last edited <AppDate :utc="lastEdited"
         /></span>
       </div>

@@ -18,7 +18,13 @@ const props = defineProps({
     required: false,
   },
 });
-const content = computed(() => renderRichText(props.blok.content));
+const content = computed(() =>
+  renderRichText(
+    typeof props.blok.content === "string"
+      ? { content: [props.blok.content] }
+      : props.blok.content
+  )
+);
 </script>
 
 <template>

@@ -25,14 +25,17 @@ defineProps({
 </script>
 
 <template>
-  <div class="border-2 rounded-lg overflow-hidden hover:bg-gray-50">
+  <div class="border-2 rounded-lg overflow-hidden">
     <div class="p-6">
       <div class="flex items-center flex-wrap gap-2">
         <AppBadge v-for="(tag, index) in tags" :key="index" :name="tag" />
       </div>
 
       <h4 class="my-2 font-semibold text-2xl leading-tight">
-        <NuxtLink :to="{ name: 'logs-slug', params: { slug } }">
+        <NuxtLink
+          :to="{ name: 'logs-slug', params: { slug } }"
+          class="hover:underline hover:underline-offset-8 focus:underline focus:underline-offset-8"
+        >
           {{ title }}
         </NuxtLink>
       </h4>

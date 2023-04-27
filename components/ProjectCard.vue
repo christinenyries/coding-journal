@@ -20,26 +20,23 @@ defineProps({
 </script>
 
 <template>
-  <div class="border-2 rounded-lg overflow-hidden hover:bg-gray-50 w-72">
-    <div class="p-6">
-      <img
-        class="border w-full"
-        :src="image"
-        :alt="`${title} project's image`"
+  <div class="p-6 border-2 rounded-lg overflow-hidden w-72">
+    <img class="border w-full" :src="image" :alt="`${title} project's image`" />
+    <h4 class="my-4 font-semibold text-2xl leading-tight">
+      <NuxtLink
+        :to="{ name: 'projects-slug', params: { slug } }"
+        class="hover:underline hover:underline-offset-8 focus:underline focus:underline-offset-8"
+      >
+        {{ title }}
+      </NuxtLink>
+    </h4>
+    <div class="flex items-center flex-wrap gap-2">
+      <AppBadge
+        v-for="(tag, index) in tags"
+        :key="index"
+        :name="tag"
+        route-name="projects"
       />
-      <h4 class="my-4 font-semibold text-2xl leading-tight">
-        <NuxtLink :to="{ name: 'projects-slug', params: { slug } }">
-          {{ title }}
-        </NuxtLink>
-      </h4>
-      <div class="flex items-center flex-wrap gap-2">
-        <AppBadge
-          v-for="(tag, index) in tags"
-          :key="index"
-          :name="tag"
-          route-name="projects"
-        />
-      </div>
     </div>
   </div>
 </template>

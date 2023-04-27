@@ -1,54 +1,33 @@
-<script setup>
-defineProps({
-  blok: {
-    type: Object,
-    required: true,
-  },
-  tags: {
-    type: Array,
-    required: true,
-  },
+<script setup lang="ts">
+const route = useRoute();
+const env = useEnvVariables();
+const api = useStoryblokApi();
+
+const isDev = route.query._storyblok || env.isDev;
+const tags = route.query.with_tag;
+const searchTerm = route.query.search_term;
+
+const { data } = await api.get("cdn/stories/", {
+  is_startpage: 0,
+  starts_with: "projects/",
+  ...(typeof tags === "string" && { with_tag: tags }),
+  ...(typeof searchTerm === "string" && { search_term: searchTerm }),
+  version: isDev ? "draft" : "published",
 });
+const projects = ref(data.stories);
 </script>
 
 <template>
-  <article v-editable="blok" class="text-lg">
-    <h1 class="text-3xl font-semibold mb-4">{{ blok.title }}</h1>
-    <img
-      class="w-full my-2"
-      :src="blok.image.filename"
-      :alt="`${blok.title} project's image`"
+  <div v-if="projects.length > 0" class="flex gap-6 flex-wrap justify-center">
+    <ProjectCard
+      v-for="project in projects"
+      :key="project.uuid"
+      :slug="project.slug"
+      :tags="project.tag_list"
+      :project="project.content"
     />
-    <div class="flex items-center justify-end flex-wrap gap-2">
-      <AppBadge
-        v-for="(tag, index) in tags"
-        :key="index"
-        :name="tag"
-        route-name="projects"
-      />
-    </div>
-    <div class="my-4">
-      <p>{{ blok.description }}</p>
-      <section class="my-6">
-        <p>
-          Github Link:
-          <a
-            class="text-blue-500 hover:underline hover:underline-offset-2"
-            :href="blok.link"
-            target="_blank"
-            >{{ blok.githubLink }}</a
-          >
-        </p>
-        <p>
-          Link:
-          <a
-            class="text-blue-500 hover:underline hover:underline-offset-2"
-            :href="blok.link"
-            target="_blank"
-            >{{ blok.link }}</a
-          >
-        </p>
-      </section>
-    </div>
-  </article>
+  </div>
+  <div v-else>
+    <p class="italic text-lg text-center">Will build something soon.</p>
+  </div>
 </template>

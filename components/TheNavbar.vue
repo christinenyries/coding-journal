@@ -13,7 +13,7 @@ const isOpen = ref(false);
       class="p-2 flex items-center justify-between border-b-2 sm:p-0 sm:border-none sm:justify-center"
     >
       <div>
-        <NuxtLink :to="{ name: 'index' }">
+        <NuxtLink to="/">
           <img
             src="https://a.storyblok.com/f/224118/340x132/e3ee1cdf49/coding-journal.png"
             alt="Coding Journal Logo"
@@ -48,7 +48,7 @@ const isOpen = ref(false);
       <div
         class="mr-0 px-4 pt-4 text-right sm:pt-0 sm:items-center sm:flex sm:gap-x-10"
       >
-        <NuxtLink :to="{ name: 'index' }" class="nav-link"> Logs </NuxtLink>
+        <NuxtLink to="/" class="nav-link"> Logs </NuxtLink>
         <NuxtLink to="/projects" class="nav-link"> Projects </NuxtLink>
         <NuxtLink to="/about" class="nav-link"> About </NuxtLink>
       </div>

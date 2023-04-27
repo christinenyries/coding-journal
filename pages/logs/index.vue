@@ -1,8 +1,11 @@
-<script setup lang="ts">
+<script setup>
 const route = useRoute();
 const env = useEnvVariables();
-const story = await useAsyncStoryblok(`logs/${route.params.slug}`, {
-  version: route.query._storyblok || env.isDev ? "draft" : "published",
+
+const isDev = route.query._storyblok || env.isDev;
+
+const story = await useAsyncStoryblok("logs", {
+  version: isDev ? "draft" : "published",
 });
 </script>
 

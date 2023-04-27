@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
-  title: {
-    type: String,
+  log: {
+    type: Object,
     required: true,
   },
   tags: {
@@ -25,7 +25,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="border-2 rounded-lg overflow-hidden">
+  <div v-editable="log" class="border-2 rounded-lg overflow-hidden">
     <div class="p-6">
       <div class="flex items-center flex-wrap gap-2">
         <AppBadge v-for="(tag, index) in tags" :key="index" :name="tag" />
@@ -33,15 +33,15 @@ defineProps({
 
       <h4 class="my-2 font-semibold text-2xl leading-tight">
         <NuxtLink
-          :to="{ name: 'logs-slug', params: { slug } }"
+          :to="`/logs/${slug}`"
           class="hover:underline hover:underline-offset-8 focus:underline focus:underline-offset-8"
         >
-          {{ title }}
+          {{ log.title || "Sample title" }}
         </NuxtLink>
       </h4>
 
       <div class="text-gray-600 text-sm text-right">
-        <span>published <AppDate :utc="published" /></span>
+        published <AppDate :utc="published" />
         <span v-if="lastEdited && lastEdited !== published"
           >, last edited <AppDate :utc="lastEdited"
         /></span>

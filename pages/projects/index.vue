@@ -25,7 +25,10 @@ stories.value = data.value?.data.stories || [];
 
 <template>
   <div>
-    <div v-if="stories.length" class="flex gap-6 flex-wrap justify-center">
+    <div
+      v-show="stories.length > 0"
+      class="flex gap-6 flex-wrap justify-center"
+    >
       <ProjectCard
         v-for="story in stories"
         :key="story.content._uid"
@@ -35,7 +38,7 @@ stories.value = data.value?.data.stories || [];
         :image="story.content.image.filename"
       />
     </div>
-    <div v-else>
+    <div v-show="stories.length === 0">
       <p class="italic text-lg text-center">Will build something soon.</p>
     </div>
   </div>

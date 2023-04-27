@@ -41,7 +41,7 @@ const updatePage = () => {
 
 <template>
   <div>
-    <div v-if="stories.length" class="flex flex-col gap-y-6">
+    <div v-show="stories.length > 0" class="flex flex-col gap-y-6">
       <LogCard
         v-for="story in stories"
         :key="story.content._uid"
@@ -59,7 +59,7 @@ const updatePage = () => {
         @update:model-value="updatePage"
       />
     </div>
-    <div v-else>
+    <div v-show="stories.length === 0">
       <p class="italic text-lg text-center">Will publish something soon.</p>
     </div>
   </div>

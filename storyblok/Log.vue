@@ -52,6 +52,10 @@ const content = computed(() => renderRichText(props.blok.content));
   @apply border-b-2 border-dashed  border-gray-400;
 }
 
+:deep(.content) h2 {
+  @apply text-xl font-semibold;
+}
+
 :deep(.content) p > code,
 :deep(.content) li > code,
 :deep(.content) dd > code,

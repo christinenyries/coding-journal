@@ -18,7 +18,7 @@ const projects = ref(data.stories);
 </script>
 
 <template>
-  <div v-if="projects.length > 0" class="flex gap-6 flex-wrap justify-center">
+  <div v-if="projects.length > 0" class="flex flex-wrap justify-center gap-6">
     <ProjectCard
       v-for="project in projects"
       :key="project.uuid"
@@ -28,6 +28,6 @@ const projects = ref(data.stories);
     />
   </div>
   <div v-else>
-    <p class="italic text-lg text-center">Will build something soon.</p>
+    <p class="text-center text-lg italic">Will build something soon.</p>
   </div>
 </template>

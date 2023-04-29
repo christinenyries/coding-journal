@@ -1,17 +1,17 @@
 <template>
-  <div class="inline-block relative mx-auto text-gray-600">
+  <div class="relative mx-auto inline-block text-gray-600">
     <input
       v-model="searchTerm"
-      class="border-2 border-gray-300 bg-white h-10 px-3 pr-10 rounded-lg text-sm focus:outline-none"
+      class="h-10 rounded-lg border-2 border-gray-300 bg-white px-3 pr-10 text-sm focus:outline-none"
       type="search"
       name="search"
       placeholder="Search"
       @keyup.enter="search"
     />
-    <button class="absolute right-0 top-0 mt-3 mr-4" @click="search">
+    <button class="absolute right-0 top-0 mr-4 mt-3" @click="search">
       <svg
         id="Capa_1"
-        class="text-gray-600 h-4 w-4 fill-current"
+        class="h-4 w-4 fill-current text-gray-600"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
         version="1.1"

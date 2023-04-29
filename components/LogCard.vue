@@ -25,13 +25,13 @@ defineProps({
 </script>
 
 <template>
-  <div v-editable="log" class="border-2 rounded-lg overflow-hidden">
+  <div v-editable="log" class="overflow-hidden rounded-lg border-2">
     <div class="p-6">
-      <div class="flex items-center flex-wrap gap-2">
+      <div class="flex flex-wrap items-center gap-2">
         <AppBadge v-for="(tag, index) in tags" :key="index" :name="tag" />
       </div>
 
-      <h4 class="my-2 font-semibold text-2xl leading-tight">
+      <h4 class="my-2 text-2xl font-semibold leading-tight">
         <NuxtLink
           :to="`/logs/${slug}`"
           class="hover:underline hover:underline-offset-8 focus:underline focus:underline-offset-8"
@@ -40,7 +40,7 @@ defineProps({
         </NuxtLink>
       </h4>
 
-      <div class="text-gray-600 text-sm text-right">
+      <div class="text-right text-sm text-gray-600">
         published <AppDate :utc="published" />
         <span v-if="lastEdited && lastEdited !== published"
           >, last edited <AppDate :utc="lastEdited"

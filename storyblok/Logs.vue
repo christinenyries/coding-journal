@@ -54,7 +54,7 @@ const logs = ref(data.stories);
     />
   </div>
   <div v-else>
-    <p class="italic text-lg text-center">Will publish something soon.</p>
+    <p class="text-center text-lg italic">Will publish something soon.</p>
   </div>
 </template>
 

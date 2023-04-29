@@ -13,15 +13,15 @@ defineProps({
 
 <template>
   <article v-editable="blok" class="text-lg">
-    <h1 class="text-3xl font-semibold mb-4">
+    <h1 class="mb-4 text-3xl font-semibold">
       {{ blok.title || "Sample title" }}
     </h1>
     <img
-      class="w-full my-2"
+      class="my-2 w-full"
       :src="blok.image?.filename"
       :alt="`${blok.title || 'Sample title'} project's image`"
     />
-    <div class="flex items-center justify-end flex-wrap gap-2">
+    <div class="flex flex-wrap items-center justify-end gap-2">
       <AppBadge v-for="(tag, index) in tags" :key="index" :name="tag" />
     </div>
     <div class="my-4">

@@ -125,13 +125,13 @@ p {
   @apply mb-2;
 }
 h2 {
-  @apply text-2xl font-semibold mb-2;
+  @apply mb-2 text-2xl font-semibold;
 }
 ul {
   @apply my-6 flex flex-wrap gap-4;
 }
 li {
-  @apply border rounded-lg p-4 pb-3;
+  @apply rounded-lg border p-4 pb-3;
 }
 img {
   @apply w-12;

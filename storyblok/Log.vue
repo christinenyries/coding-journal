@@ -24,15 +24,15 @@ const content = computed(() => renderRichText(props.blok.content));
 <template>
   <article v-editable="blok">
     <h1 class="text-3xl font-semibold">{{ blok.title || "Sample title" }}</h1>
-    <div class="py-2 flex justify-between">
-      <div class="pt-1 text-gray-600 text-sm">
+    <div class="flex justify-between py-2">
+      <div class="pt-1 text-sm text-gray-600">
         published <AppDate :utc="published" />
         <span v-if="lastEdited && lastEdited !== published"
           >, last edited <AppDate :utc="lastEdited"
         /></span>
       </div>
 
-      <div class="flex items-center justify-end flex-wrap gap-2">
+      <div class="flex flex-wrap items-center justify-end gap-2">
         <AppBadge v-for="(tag, index) in tags" :key="index" :name="tag" />
       </div>
     </div>
@@ -77,6 +77,6 @@ const content = computed(() => renderRichText(props.blok.content));
 }
 
 :deep(.content) code {
-  @apply p-4 bg-gray-600 text-white rounded-md;
+  @apply rounded-md bg-gray-600 p-4 text-white;
 }
 </style>

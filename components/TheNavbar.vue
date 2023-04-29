@@ -3,14 +3,14 @@ const isOpen = ref(false);
 </script>
 
 <template>
-  <header class="bg-gray-50 sm:p-2 sm:border-b-2 sm:flex sm:justify-between">
-    <div class="hidden pl-4 lg:flex lg:items-center lg:justify-start lg:w-1/3">
-      <div>
-        <AppSearchBar />
-      </div>
+  <header
+    class="items-center justify-between bg-gray-50 sm:flex sm:border-b-2 sm:p-2 sm:pr-4 lg:pl-4"
+  >
+    <div class="hidden lg:block lg:flex-1">
+      <AppSearchBar />
     </div>
     <div
-      class="p-2 flex items-center justify-between border-b-2 sm:p-0 sm:border-none sm:justify-center"
+      class="flex items-center justify-between border-b-2 p-2 sm:justify-center sm:border-none sm:p-0 lg:flex-1"
     >
       <div>
         <NuxtLink to="/">
@@ -43,10 +43,10 @@ const isOpen = ref(false);
     </div>
     <nav
       :class="isOpen ? 'block' : 'hidden'"
-      class="text-xl tracking-wide lowercase bg-white sm:flex sm:bg-inherit lg:justify-end lg:w-1/3"
+      class="bg-white text-xl lowercase tracking-wide sm:flex sm:justify-end sm:bg-inherit lg:flex-1"
     >
       <div
-        class="mr-0 px-4 pt-4 text-right sm:pt-0 sm:items-center sm:flex sm:gap-x-10"
+        class="pr-4 pt-2 text-right sm:flex sm:items-center sm:gap-x-10 sm:p-0"
       >
         <NuxtLink to="/" class="nav-link"> Logs </NuxtLink>
         <NuxtLink to="/projects" class="nav-link"> Projects </NuxtLink>
@@ -61,9 +61,9 @@ const isOpen = ref(false);
   @apply mt-1 sm:mt-0;
 }
 .nav-link {
-  @apply block p-2 rounded hover:underline hover:underline-offset-8 hover:decoration-4 hover:decoration-gray-500 sm:mt-0 sm:ml-2;
+  @apply block rounded p-2 hover:underline hover:decoration-gray-500 hover:decoration-4 hover:underline-offset-8 sm:ml-2 sm:mt-0;
 }
 .nav-link.router-link-active {
-  @apply underline underline-offset-8 decoration-4 decoration-gray-500;
+  @apply underline decoration-gray-500 decoration-4 underline-offset-8;
 }
 </style>

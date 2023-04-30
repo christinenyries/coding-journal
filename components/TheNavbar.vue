@@ -43,10 +43,10 @@ const isOpen = ref(false);
     </div>
     <nav
       :class="isOpen ? 'block' : 'hidden'"
-      class="bg-white text-xl lowercase tracking-wide sm:flex sm:justify-end sm:bg-inherit lg:flex-1"
+      class="mr-auto bg-white sm:block sm:flex-1 sm:bg-inherit"
     >
       <div
-        class="pr-4 pt-2 text-right sm:flex sm:items-center sm:gap-x-10 sm:p-0"
+        class="pr-4 pt-2 text-right text-xl lowercase tracking-wide sm:flex sm:justify-end sm:gap-x-10 sm:p-0"
       >
         <NuxtLink to="/" class="nav-link"> Logs </NuxtLink>
         <NuxtLink to="/projects" class="nav-link"> Projects </NuxtLink>

@@ -31,7 +31,7 @@ defineProps({
           Github Link:
           <a
             class="text-blue-500 hover:underline hover:underline-offset-2"
-            :href="blok.link"
+            :href="blok.githublink"
             target="_blank"
             >{{ blok.githubLink || "N/A" }}</a
           >

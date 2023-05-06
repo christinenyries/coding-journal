@@ -6,8 +6,7 @@ const storyblokApi = useStoryblokApi();
 const isDev = route.query._storyblok || env.isDev;
 const tags = route.query.with_tag;
 const searchTerm = route.query.search_term;
-
-const { data: response } = await useAsyncData(() =>
+const { data: response } = await useAsyncData(route.fullPath, () =>
   storyblokApi.get("cdn/stories/", {
     is_startpage: 0,
     starts_with: "projects/",

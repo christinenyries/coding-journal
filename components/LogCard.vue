@@ -1,5 +1,5 @@
 <script setup>
-defineProps({
+const props = defineProps({
   log: {
     type: Object,
     required: true,
@@ -22,6 +22,12 @@ defineProps({
     required: false,
   },
 });
+
+const showLastEdited = computed(
+  () =>
+    props.lastEdited &&
+    props.lastEdited.split("T")[0] !== props.published.split("T")[0]
+);
 </script>
 
 <template>
@@ -42,7 +48,7 @@ defineProps({
 
       <div class="text-right text-sm text-gray-600">
         published <AppDate :utc="published" />
-        <span v-if="lastEdited && lastEdited !== published"
+        <span v-if="showLastEdited"
           >, last edited <AppDate :utc="lastEdited"
         /></span>
       </div>

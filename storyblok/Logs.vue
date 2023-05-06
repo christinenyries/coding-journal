@@ -20,17 +20,20 @@ const tags = route.query.with_tag;
 const searchTerm = route.query.search_term;
 const isDev = route.query._storyblok || env.isDev;
 
-const { data, total } = await storyblokApi.get("cdn/stories/", {
-  is_startpage: 0,
-  starts_with: "logs/",
-  page: page.value,
-  per_page: perPage,
-  ...(typeof tags === "string" && { with_tag: tags }),
-  ...(typeof searchTerm === "string" && { search_term: searchTerm }),
-  version: isDev ? "draft" : "published",
-});
+const { data: response } = await useAsyncData(() =>
+  storyblokApi.get("cdn/stories/", {
+    is_startpage: 0,
+    starts_with: "logs/",
+    page: page.value,
+    per_page: perPage,
+    ...(typeof tags === "string" && { with_tag: tags }),
+    ...(typeof searchTerm === "string" && { search_term: searchTerm }),
+    version: isDev ? "draft" : "published",
+  })
+);
+const logs = response.value?.data.stories || [];
+const total = response.value?.total || 0;
 const totalPages = Math.ceil(total / perPage);
-const logs = ref(data.stories);
 </script>
 
 <template>

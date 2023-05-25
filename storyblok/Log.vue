@@ -56,6 +56,14 @@ const content = computed(() => renderRichText(props.blok.content));
   @apply text-xl font-semibold;
 }
 
+:deep(.content) ul {
+  @apply list-inside list-disc;
+}
+
+:deep(.content) ul > li > p {
+  @apply inline-block;
+}
+
 :deep(.content) p > code,
 :deep(.content) li > code,
 :deep(.content) dd > code,

@@ -57,11 +57,7 @@ const content = computed(() => renderRichText(props.blok.content));
 }
 
 :deep(.content) ul {
-  @apply list-inside list-disc;
-}
-
-:deep(.content) ul > li > p {
-  @apply inline-block;
+  @apply list-disc pl-4;
 }
 
 :deep(.content) p > code,

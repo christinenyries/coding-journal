@@ -44,43 +44,7 @@ const content = computed(() => renderRichText(props.blok.content));
 </template>
 
 <style scoped>
-:deep(.content) > * {
-  @apply mb-8;
-}
-
-:deep(.content) a {
-  @apply border-b-2 border-dashed  border-gray-400;
-}
-
-:deep(.content) h2 {
-  @apply text-xl font-semibold;
-}
-
-:deep(.content) ul {
-  @apply list-disc pl-4;
-}
-
-:deep(.content) p > code,
-:deep(.content) li > code,
-:deep(.content) dd > code,
-:deep(.content) td > code {
-  background: darkslategray;
-  word-wrap: break-word;
-  box-decoration-break: clone;
-  padding: 0.1rem 0.3rem 0.2rem;
-  border-radius: 0.2rem;
-}
-
-:deep(.content) pre code {
-  display: block;
-  white-space: pre;
-  -webkit-overflow-scrolling: touch;
-  overflow-x: scroll;
-  max-width: 100%;
-  min-width: 100px;
-}
-
-:deep(.content) code {
-  @apply rounded-md bg-gray-600 p-4 text-white;
+.content {
+  @apply prose prose-lg prose-slate;
 }
 </style>

@@ -4,4 +4,5 @@ export default {
     "./pages/**/*.{vue,js,ts}",
     "./storyblok/**/*.{vue,js,ts}",
   ],
+  plugins: [require("@tailwindcss/typography")],
 };

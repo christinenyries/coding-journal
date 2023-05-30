@@ -13,6 +13,12 @@ defineProps({
     required: true,
   },
 });
+
+function toWebP(imageUrl) {
+  // Enable Storyblok's server-side WebP support detection by simply appending `/m/` at the end of image url
+  // See https://www.storyblok.com/docs/image-service#optimize
+  return `${imageUrl}/m/`;
+}
 </script>
 
 <template>
@@ -22,7 +28,7 @@ defineProps({
   >
     <img
       class="w-full border"
-      :src="project.image?.filename"
+      :src="toWebP(project.image?.filename)"
       :alt="`${project.title} project's image`"
     />
     <h4 class="my-4 text-2xl font-semibold leading-tight">

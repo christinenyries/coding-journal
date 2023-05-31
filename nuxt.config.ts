@@ -7,6 +7,9 @@ export default defineNuxtConfig({
       region: "eu",
     },
   },
+  app: {
+    pageTransition: { name: "page", mode: "out-in" },
+  },
   eslint: {
     lintOnStart: false,
   },

@@ -2,11 +2,11 @@
 const route = useRoute();
 
 const { slug } = route.params;
-const showDraft = route.query._storyblok || useRuntimeConfig().isDev;
+const isDraft = route.query._storyblok || useRuntimeConfig().isDev;
 const story = await useAsyncStoryblok(
   slug && slug.length > 0 ? slug.join("/") : "home",
   {
-    version: showDraft ? "draft" : "published",
+    version: isDraft ? "draft" : "published",
   }
 );
 </script>

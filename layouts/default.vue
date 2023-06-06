@@ -1,3 +1,9 @@
+<script setup>
+useSeoMeta({
+  title: "Coding Journal",
+});
+</script>
+
 <template>
   <div>
     <NuxtLoadingIndicator color="#0ea5e9" />

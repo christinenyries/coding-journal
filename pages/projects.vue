@@ -1,4 +1,7 @@
 <script setup>
+useSeoMeta({
+  titleTemplate: "%s - Projects",
+});
 const route = useRoute();
 const storyblokApi = useStoryblokApi();
 const isDraft = route.query._storyblok || useRuntimeConfig().isDev;

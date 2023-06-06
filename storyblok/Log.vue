@@ -1,4 +1,7 @@
 <script setup>
+useSeoMeta({
+  titleTemplate: (titleChunk) => `${titleChunk} - ${props.blok.title}`,
+});
 const props = defineProps({
   blok: {
     type: Object,

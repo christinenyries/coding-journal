@@ -60,6 +60,9 @@
 </template>
 
 <script setup lang="ts">
+useSeoMeta({
+  titleTemplate: (titleChunk) => `${titleChunk} - About`,
+});
 const technologies: { name: string; imageURL: string; link: string }[] = [
   {
     name: "TypeScript",

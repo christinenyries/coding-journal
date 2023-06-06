@@ -4,6 +4,8 @@ export default defineNuxtConfig({
     isDev: process.env.NODE_ENV !== "production",
   },
 
+  css: ["~/assets/css/main.css"],
+
   modules: ["@storyblok/nuxt", "@nuxtjs/tailwindcss", "@nuxtjs/eslint-module"],
 
   storyblok: {

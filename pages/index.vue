@@ -3,7 +3,7 @@ const route = useRoute();
 const storyblokApi = useStoryblokApi();
 const isDraft = route.query._storyblok || useRuntimeConfig().isDev;
 
-const perPage = 3;
+const perPage = 10;
 const page = ref(Number(route.query.page) || 1);
 
 const getFilters = (query) =>

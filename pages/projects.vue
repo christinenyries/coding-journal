@@ -18,14 +18,14 @@ const { data, refresh } = await useAsyncData(route.fullPath, () => {
   const filters = getFilters(route.query);
   return storyblokApi.get("cdn/stories/", {
     is_startpage: 0,
-    starts_with: "logs/",
+    starts_with: "projects/",
     page: page.value,
     per_page: perPage,
     ...filters,
     version: isDraft ? "draft" : "published",
   });
 });
-const logs = computed(() => data.value?.data.stories);
+const projects = computed(() => data.value?.data.stories);
 
 watch(
   () => route.query,
@@ -34,15 +34,13 @@ watch(
 </script>
 
 <template>
-  <div v-if="logs" class="flex flex-col gap-4">
-    <LogCard
-      v-for="log in logs"
-      :key="log.id"
-      :log="log.content"
-      :slug="log.slug"
-      :published="log.first_published_at || log.created_at"
-      :last-edited="log.published_at"
-      :tags="log.tag_list"
+  <div v-if="projects" class="flex flex-wrap gap-4">
+    <ProjectCard
+      v-for="project in projects"
+      :key="project.uuid"
+      :slug="project.slug"
+      :tags="project.tag_list"
+      :project="project.content"
     />
   </div>
 </template>

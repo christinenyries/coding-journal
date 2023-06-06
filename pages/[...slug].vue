@@ -1,14 +1,12 @@
 <script setup>
 const route = useRoute();
-const env = useEnvVariables();
 
 const { slug } = route.params;
-const isDev = route.query._storyblok || env.isDev;
-
+const showDraft = route.query._storyblok || useRuntimeConfig().isDev;
 const story = await useAsyncStoryblok(
   slug && slug.length > 0 ? slug.join("/") : "home",
   {
-    version: isDev ? "draft" : "published",
+    version: showDraft ? "draft" : "published",
   }
 );
 </script>

@@ -45,6 +45,6 @@ const content = computed(() => renderRichText(props.blok.content));
 
 <style scoped>
 .content {
-  @apply prose prose-lg prose-slate;
+  @apply prose-lg prose-slate prose;
 }
 </style>

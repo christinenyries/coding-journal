@@ -34,7 +34,7 @@ watch(
 </script>
 
 <template>
-  <div v-if="projects" class="flex flex-wrap gap-4">
+  <div v-if="projects" class="flex flex-wrap justify-center gap-12">
     <ProjectCard
       v-for="project in projects"
       :key="project.uuid"

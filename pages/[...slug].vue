@@ -1,14 +1,16 @@
 <script setup>
 const route = useRoute();
+const storyblokApi = useStoryblokApi();
 
 const { slug } = route.params;
 const isDraft = route.query._storyblok || useRuntimeConfig().isDev;
-const story = await useAsyncStoryblok(
-  slug && slug.length > 0 ? slug.join("/") : "home",
-  {
+
+const { data } = await useAsyncData(route.fullPath, () => {
+  return storyblokApi.get(`cdn/stories/${slug.join("/")}/`, {
     version: isDraft ? "draft" : "published",
-  }
-);
+  });
+});
+const story = computed(() => data.value?.data.story);
 </script>
 
 <template>

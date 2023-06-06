@@ -1,6 +1,6 @@
 <template>
-  <article class="text-lg">
-    <h1 class="pb-6 text-3xl font-semibold">About</h1>
+  <article class="text-xl">
+    <h1 class="pb-6 text-5xl font-bold">About</h1>
     <section>
       <h2>this.website</h2>
       <p>

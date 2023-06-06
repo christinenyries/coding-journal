@@ -22,10 +22,11 @@ const content = computed(() => renderRichText(props.blok.content));
 </script>
 
 <template>
-  <article v-editable="blok">
-    <h1 class="text-3xl font-semibold">{{ blok.title || "Sample title" }}</h1>
-    <div class="flex justify-between py-2">
-      <div class="pt-1 text-sm text-gray-600">
+  <div v-editable="blok">
+    <h1 class="mb-4 text-5xl font-bold">{{ blok.title || "Sample title" }}</h1>
+
+    <div class="flex justify-between">
+      <div class="text-sm text-gray-600">
         published <AppDate :utc="published" />
         <span v-if="lastEdited && lastEdited !== published"
           >, last edited <AppDate :utc="lastEdited"
@@ -39,12 +40,6 @@ const content = computed(() => renderRichText(props.blok.content));
 
     <!-- NOTE: Can lead to XSS attacks, but I'm the only one providing input to this field, so I think it's okay to disable this for now. -->
     <!-- eslint-disable-next-line vue/no-v-html -->
-    <div class="content py-4 text-lg leading-relaxed" v-html="content"></div>
-  </article>
+    <div class="prose prose-xl prose-slate mt-20" v-html="content"></div>
+  </div>
 </template>
-
-<style scoped>
-.content {
-  @apply prose prose-lg prose-slate;
-}
-</style>

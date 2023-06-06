@@ -34,7 +34,7 @@ watch(
 </script>
 
 <template>
-  <div v-if="logs" class="flex flex-col gap-4">
+  <div v-if="logs" class="flex flex-col gap-8">
     <LogCard
       v-for="log in logs"
       :key="log.id"

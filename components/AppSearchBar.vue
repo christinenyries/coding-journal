@@ -32,23 +32,24 @@
 </template>
 
 <script setup lang="ts">
-const router = useRouter();
 const route = useRoute();
 
 const searchTerm = ref<string>("");
 const search = () => {
+  const path = route.path.startsWith("/projects") ? "/projects" : "/";
+
   searchTerm.value = searchTerm.value.trim();
-
-  if (!searchTerm.value) return;
-  const routeName = /\/projects/.test(route.path) ? "projects" : "logs";
-
-  router.push({
-    name: routeName,
-    query: {
-      ...route.query,
-      search_term: encodeURIComponent(searchTerm.value),
-    },
-  });
+  if (!searchTerm.value) {
+    navigateTo(path);
+  } else {
+    navigateTo({
+      path,
+      query: {
+        ...route.query,
+        search_term: encodeURIComponent(searchTerm.value),
+      },
+    });
+  }
 
   searchTerm.value = "";
 };

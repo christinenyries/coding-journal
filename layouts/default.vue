@@ -1,24 +1,15 @@
+<script setup>
+useSeoMeta({
+  title: "Coding Journal",
+});
+</script>
+
 <template>
-  <main>
-    <NuxtLoadingIndicator />
+  <div>
+    <NuxtLoadingIndicator color="#0ea5e9" />
     <TheNavbar />
-    <div
-      :key="JSON.stringify($route.query)"
-      class="text- mx-auto my-20 max-w-2xl px-6"
-    >
+    <div class="mx-auto my-20 w-11/12 lg:w-1/2">
       <slot />
     </div>
-  </main>
+  </div>
 </template>
-
-<style>
-.page-enter-active,
-.page-leave-active {
-  transition: all 0.4s;
-}
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
-  filter: blur(1rem);
-}
-</style>

@@ -1,5 +1,8 @@
 <script setup>
-defineProps({
+useSeoMeta({
+  titleTemplate: (titleChunk) => `${titleChunk} - ${props.blok.title}`,
+});
+const props = defineProps({
   blok: {
     type: Object,
     required: true,
@@ -12,40 +15,48 @@ defineProps({
 </script>
 
 <template>
-  <article v-editable="blok" class="text-lg">
-    <h1 class="mb-4 text-3xl font-semibold">
+  <article v-editable="blok" class="flex flex-col gap-6">
+    <h1 class="text-5xl font-bold">
       {{ blok.title || "Sample title" }}
     </h1>
     <img
-      class="my-2 w-full"
+      class="border"
       :src="blok.image?.filename"
       :alt="`${blok.title || 'Sample title'} project's image`"
     />
-    <div class="flex flex-wrap items-center justify-end gap-2">
+    <div class="mb-4 flex flex-wrap items-center justify-end gap-2">
       <AppBadge v-for="(tag, index) in tags" :key="index" :name="tag" />
     </div>
-    <div class="my-4">
+    <div class="text-xl">
       <p>{{ blok.description || "Sample description" }}</p>
-      <section class="my-6">
-        <p>
-          Github Link:
-          <a
-            class="text-blue-500 hover:underline hover:underline-offset-2"
-            :href="blok.githubLink"
-            target="_blank"
-            >{{ blok.githubLink || "N/A" }}</a
-          >
-        </p>
-        <p>
-          Link:
-          <a
-            class="text-blue-500 hover:underline hover:underline-offset-2"
-            :href="blok.link"
-            target="_blank"
-            >{{ blok.link || "N/A" }}</a
-          >
-        </p>
-      </section>
+      <table class="mt-6 table-auto">
+        <tbody>
+          <tr>
+            <td>Source Code</td>
+            <td class="pr-4">:</td>
+            <td>
+              <a
+                class="text-blue-500 hover:underline hover:underline-offset-2"
+                :href="blok.githubLink"
+                target="_blank"
+                >{{ blok.githubLink || "N/A" }}</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td>Website</td>
+            <td class="pr-4">:</td>
+            <td>
+              <a
+                class="text-blue-500 hover:underline hover:underline-offset-2"
+                :href="blok.link"
+                target="_blank"
+                >{{ blok.link || "N/A" }}</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </article>
 </template>

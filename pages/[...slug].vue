@@ -1,24 +1,38 @@
 <script setup>
 const route = useRoute();
 const storyblokApi = useStoryblokApi();
-
-const { slug } = route.params;
 const isDraft = route.query._storyblok || useRuntimeConfig().isDev;
 
-const { data } = await useAsyncData(route.fullPath, () => {
-  return storyblokApi.get(`cdn/stories/${slug.join("/")}/`, {
-    version: isDraft ? "draft" : "published",
+const fullSlug = route.params.slug.join("/");
+if (
+  !(
+    fullSlug.startsWith("logs/") ||
+    fullSlug.startsWith("projects/") ||
+    fullSlug === "about"
+  )
+) {
+  throw createError({
+    statusCode: 404,
+    message: `We don't have a page on route '/${fullSlug}'.`,
   });
-});
+}
+
+const { data } = await useAsyncData(route.fullPath, () =>
+  storyblokApi.get(`cdn/stories/${fullSlug}/`, {
+    version: isDraft ? "draft" : "published",
+  })
+);
 const story = computed(() => data.value?.data.story);
 </script>
 
 <template>
-  <StoryblokComponent
-    v-if="story"
-    :blok="story.content"
-    :tags="story.tag_list"
-    :published="story.first_published_at || story.created_at"
-    :last-edited="story.published_at"
-  />
+  <div>
+    <StoryblokComponent
+      v-if="story"
+      :blok="story.content"
+      :tags="story.tag_list"
+      :published="story.first_published_at || story.created_at"
+      :last-edited="story.published_at"
+    />
+  </div>
 </template>

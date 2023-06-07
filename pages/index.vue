@@ -6,16 +6,13 @@ const route = useRoute();
 const storyblokApi = useStoryblokApi();
 const isDraft = route.query._storyblok || useRuntimeConfig().isDev;
 
-const perPage = 3;
-const page = ref(Number(route.query.page) || 1);
-
 const getFilters = (query) =>
   Object.keys(query).reduce((_filters, key) => {
     if (!["page", "search_term", "with_tag"].includes(key)) return _filters;
 
     const value = query[key];
-    if (key === "page" && value >= 1 && value <= pages.value) {
-      _filters[key] = value;
+    if (key === "page" && !isNaN(parseInt(value))) {
+      _filters[key] = parseInt(value);
     } else if (key === "search_term") {
       _filters[key] = decodeURIComponent(value);
     } else if (key === "with_tag") {
@@ -31,19 +28,22 @@ const { data, refresh } = await useAsyncData(route.fullPath, () => {
     is_startpage: 0,
     starts_with: "logs/",
     per_page: perPage,
-    page: 1,
     ...filters,
     version: isDraft ? "draft" : "published",
   });
 });
 const logs = computed(() => data.value?.data.stories);
-const total = computed(() => data.value?.total || 0);
-const pages = computed(() => Math.ceil(total.value / perPage));
+const logsCount = computed(() => data.value?.total || 0);
+
+const defaultPage = 1;
+const perPage = 10;
+const currentPage = computed(() => parseInt(route.query.page) || defaultPage);
+const pagesCount = computed(() => Math.ceil(logsCount.value / perPage));
+
 watch(
   () => route.query,
   () => refresh()
 );
-watch(page, (newValue) => navigateTo(`?page=${newValue}`));
 </script>
 
 <template>
@@ -59,22 +59,11 @@ watch(page, (newValue) => navigateTo(`?page=${newValue}`));
         :tags="log.tag_list"
       />
     </div>
-    <div v-if="pages > 1" class="mt-10 flex justify-center gap-4">
-      <button
-        class="w-[100px] rounded border py-2 shadow enabled:hover:bg-gray-50 disabled:bg-slate-300"
-        :class="{}"
-        :disabled="page <= 1"
-        @click="page -= 1"
-      >
-        ⬅️ Prev
-      </button>
-      <button
-        class="w-[100px] rounded border py-2 shadow enabled:hover:bg-gray-50 disabled:bg-slate-300"
-        :disabled="page >= pages"
-        @click="page += 1"
-      >
-        Next ➡️
-      </button>
-    </div>
+
+    <AppPagination
+      v-if="pagesCount > 1"
+      :page="currentPage"
+      :pages="pagesCount"
+    />
   </div>
 </template>

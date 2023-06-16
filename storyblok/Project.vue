@@ -25,7 +25,12 @@ const props = defineProps({
       :alt="`${blok.title || 'Sample title'} project's image`"
     />
     <div class="mb-4 flex flex-wrap items-center justify-end gap-2">
-      <AppBadge v-for="(tag, index) in tags" :key="index" :name="tag" />
+      <AppBadge
+        v-for="(tag, index) in tags"
+        :key="index"
+        :name="tag"
+        for="/projects"
+      />
     </div>
     <div class="text-xl">
       <p>{{ blok.description || "Sample description" }}</p>

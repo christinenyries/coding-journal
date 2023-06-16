@@ -26,7 +26,12 @@ function toWebP(imageUrl) {
     <div
       class="absolute -top-3 right-3 flex flex-wrap items-center justify-end gap-2"
     >
-      <AppBadge v-for="(tag, index) in tags" :key="index" :name="tag" />
+      <AppBadge
+        v-for="(tag, index) in tags"
+        :key="index"
+        :name="tag"
+        for="/projects"
+      />
     </div>
     <NuxtLink :to="`/projects/${slug}`">
       <div
